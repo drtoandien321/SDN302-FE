@@ -106,22 +106,15 @@ input[type="password"]::-ms-reveal {
   outline: none;
 }
 
-/* Input/Textarea lồng trong HeroUI: ring hiển thị ở input-wrapper,
-   nên phần tử control bên trong không được có outline/box-shadow riêng. */
-[data-slot="input-wrapper"] input,
-[data-slot="inner-wrapper"] input,
-[data-slot="input-wrapper"] textarea,
-[data-slot="inner-wrapper"] textarea,
-[data-slot="input"] {
-  outline: none !important;
+/* Input/Textarea lồng trong HeroUI: focus ring hiển thị ở input-wrapper.
+   HeroUI 2.8 thêm class `!outline-solid` trực tiếp lên control; dùng selector
+   hai data-slot + longhand để thắng utility important đó sau khi build Tailwind v4. */
+[data-slot="input-wrapper"] [data-slot="input"],
+[data-slot="inner-wrapper"] [data-slot="input"] {
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
   box-shadow: none !important;
-}
-[data-slot="input-wrapper"] input:focus-visible,
-[data-slot="inner-wrapper"] input:focus-visible,
-[data-slot="input-wrapper"] textarea:focus-visible,
-[data-slot="inner-wrapper"] textarea:focus-visible,
-[data-slot="input"]:focus-visible {
-  outline: none !important;
 }
 
 /* Tôn trọng người dùng giảm chuyển động */
