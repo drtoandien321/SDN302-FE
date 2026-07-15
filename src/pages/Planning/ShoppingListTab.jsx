@@ -21,6 +21,7 @@ import { useTransactionsContext } from "../../contexts/TransactionsContext";
 import { useAuth } from "../../contexts/AuthContext";
 import * as shoppingApi from "../../services/shoppingApi";
 import { formatCurrency } from "../../utils/formatCurrency";
+import CurrencyInput from "../../components/CurrencyInput";
 
 /**
  * Parse amount string với hỗ trợ "k"/"m". "55k" -> 55000, "1.5m" -> 1500000.
@@ -430,17 +431,6 @@ const ShoppingListTab = () => {
   );
 };
 
-const formatInputAmount = (value) => {
-  const numericValue = String(value).replace(/[^\d]/g, "");
-  if (!numericValue) return "";
-  return Number(numericValue).toLocaleString("vi-VN");
-};
-
-const parseInputAmount = (value) => {
-  const numericValue = String(value).replace(/[^\d]/g, "");
-  return numericValue || "";
-};
-
 const CreatePlanModal = ({
   isOpen,
   onClose,
@@ -481,11 +471,11 @@ const CreatePlanModal = ({
                 size="lg"
                 startContent={<ShoppingCart className="w-4 h-4 text-gray-400" />}
               />
-              <Input
+              <CurrencyInput
                 label="Ngân sách dự kiến"
                 placeholder="2,000,000"
-                value={formatInputAmount(budget)}
-                onValueChange={(val) => setBudget(parseInputAmount(val))}
+                value={budget}
+                onValueChange={setBudget}
                 variant="bordered"
                 size="lg"
                 endContent={
@@ -546,13 +536,13 @@ const AddNewItemForm = ({ onAdd }) => {
         value={name}
         onValueChange={setName}
       />
-      <Input
+      <CurrencyInput
         label="Giá dự kiến"
         placeholder="0"
         size="sm"
         className="w-32"
-        value={formatInputAmount(price)}
-        onValueChange={(val) => setPrice(parseInputAmount(val))}
+        value={price}
+        onValueChange={setPrice}
         endContent={<span className="text-xs text-gray-400">VND</span>}
       />
       <Button isIconOnly color="primary" type="submit">

@@ -19,7 +19,7 @@ import {
 import { Plus, Trophy, Flame, Target, Trash2, Calendar } from "lucide-react";
 import { useChallenges } from "../../contexts/ChallengesContext";
 import { format, differenceInDays, parseISO } from "date-fns";
-import { vi } from "date-fns/locale";
+import CurrencyInput from "../../components/CurrencyInput";
 
 /**
  * Template thử thách phổ biến
@@ -31,6 +31,7 @@ const CHALLENGE_TEMPLATES = [
     description: "Tiết kiệm tiền cà phê trong 30 ngày",
     duration: 30,
     dailyTarget: 40000,
+    targetAmount: 1200000,
     type: "no_spend",
   },
   {
@@ -38,7 +39,8 @@ const CHALLENGE_TEMPLATES = [
     title: "30 ngày không mua trà sữa",
     description: "Tiết kiệm tiền trà sữa trong 30 ngày",
     duration: 30,
-    dailyTarget: 45000,
+    dailyTarget: 30000,
+    targetAmount: 900000,
     type: "no_spend",
   },
   {
@@ -47,6 +49,7 @@ const CHALLENGE_TEMPLATES = [
     description: "Bỏ heo 50.000đ mỗi ngày trong 30 ngày",
     duration: 30,
     dailyTarget: 50000,
+    targetAmount: 1500000,
     type: "save_daily",
   },
   {
@@ -54,7 +57,8 @@ const CHALLENGE_TEMPLATES = [
     title: "Tiết kiệm 500k/tuần",
     description: "Đặt riêng 500.000đ mỗi tuần trong 4 tuần",
     duration: 28,
-    dailyTarget: 71429,
+    dailyTarget: 2000000 / 28,
+    targetAmount: 2000000,
     type: "save_daily",
   },
 ];
@@ -68,12 +72,10 @@ const ChallengesTab = () => {
     loading,
     stats,
     addChallenge,
-    editChallenge,
     removeChallenge,
   } = useChallenges();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [customForm, setCustomForm] = useState({
     title: "",
     description: "",
@@ -96,7 +98,7 @@ const ChallengesTab = () => {
       title: template.title,
       description: template.description,
       type: template.type,
-      targetAmount: template.dailyTarget * template.duration,
+      targetAmount: template.targetAmount,
       dailyTarget: template.dailyTarget,
       startDate: format(today, "yyyy-MM-dd"),
       endDate: format(endDate, "yyyy-MM-dd"),
@@ -353,9 +355,7 @@ const ChallengesTab = () => {
                           </p>
                         </div>
                         <Chip size="sm" color="primary" variant="flat">
-                          {formatMoney(
-                            template.dailyTarget * template.duration
-                          )}
+                          {formatMoney(template.targetAmount)}
                         </Chip>
                       </div>
                     </CardBody>
@@ -387,9 +387,8 @@ const ChallengesTab = () => {
                 minRows={2}
               />
               <div className="grid grid-cols-2 gap-3">
-                <Input
+                <CurrencyInput
                   label="Mục tiêu tiết kiệm"
-                  type="number"
                   placeholder="1000000"
                   value={customForm.targetAmount}
                   onValueChange={(v) =>

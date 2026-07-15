@@ -6,12 +6,12 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
   Select,
   SelectItem,
 } from "@heroui/react";
 import { useBudgetContext } from "../../contexts/BudgetContext";
 import { useCategoryContext } from "../../contexts/CategoryContext";
+import CurrencyInput from "../CurrencyInput";
 
 const CreateBudgetModal = ({ isOpen, onClose, editingBudget }) => {
   const { addBudget, updateBudget, budgets } = useBudgetContext();
@@ -48,7 +48,7 @@ const CreateBudgetModal = ({ isOpen, onClose, editingBudget }) => {
       return;
     }
 
-    const numericLimit = Number(limit.replace(/[^0-9]/g, ""));
+    const numericLimit = Number(limit);
     if (isNaN(numericLimit) || numericLimit <= 0) {
       setError("Hạn mức phải lớn hơn 0");
       return;
@@ -73,18 +73,6 @@ const CreateBudgetModal = ({ isOpen, onClose, editingBudget }) => {
       setError("Có lỗi xảy ra, vui lòng thử lại");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  /**
-   * Format số tiền khi nhập
-   */
-  const handleAmountChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, "");
-    if (value) {
-      setLimit(Number(value).toLocaleString("vi-VN"));
-    } else {
-      setLimit("");
     }
   };
 
@@ -115,15 +103,13 @@ const CreateBudgetModal = ({ isOpen, onClose, editingBudget }) => {
                   ))}
                 </Select>
 
-                <Input
+                <CurrencyInput
                   label="Hạn mức chi tiêu (VNĐ)"
                   placeholder="0"
                   value={limit}
-                  onChange={handleAmountChange}
+                  onValueChange={setLimit}
                   errorMessage={error}
                   isInvalid={!!error}
-                  type="text"
-                  inputMode="numeric"
                 />
               </div>
             </ModalBody>

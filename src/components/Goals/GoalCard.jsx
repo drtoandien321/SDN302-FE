@@ -18,7 +18,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Input,
 } from "@heroui/react";
 import {
   MoreVertical,
@@ -29,6 +28,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { formatCurrency } from "../../utils/formatCurrency";
+import CurrencyInput from "../CurrencyInput";
 
 /**
  * Tính số ngày còn lại
@@ -64,9 +64,7 @@ const GoalCard = ({ goal, onAddMoney, onEdit, onDelete }) => {
   const isOverdue = daysRemaining !== null && daysRemaining < 0 && !isCompleted;
 
   const handleAddMoney = async () => {
-    // Loại bỏ cả dấu chấm và phẩy (VN dùng dấu chấm phân cách nghìn)
-    const cleanedAmount = addAmount.replace(/[.,]/g, "");
-    const amount = parseInt(cleanedAmount, 10);
+    const amount = Number(addAmount);
     if (isNaN(amount) || amount <= 0) return;
 
     setIsLoading(true);
@@ -221,17 +219,11 @@ const GoalCard = ({ goal, onAddMoney, onEdit, onDelete }) => {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               Thêm tiền vào mục tiêu "{goal.name}"
             </p>
-            <Input
-              type="text"
+            <CurrencyInput
               label="Số tiền"
               placeholder="Nhập số tiền"
               value={addAmount}
-              onChange={(e) => {
-                // Format number with commas
-                const value = e.target.value.replace(/\D/g, "");
-                const formatted = new Intl.NumberFormat("vi-VN").format(value);
-                setAddAmount(formatted);
-              }}
+              onValueChange={setAddAmount}
               endContent={<span className="text-gray-400 text-sm">VND</span>}
             />
           </ModalBody>

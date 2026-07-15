@@ -34,7 +34,7 @@ export const listPlans = async (ledgerId) => {
 export const getPlan = async (planId) => {
   const data = await apiClient.get(`/shopping-plans/${planId}`);
   return {
-    ...mapPlanSummary(data.shoppingPlan),
+    ...mapPlanSummary(data.plan),
     items: (data.items || []).map(mapItem),
   };
 };

@@ -17,6 +17,7 @@ import {
   DEFAULT_GOAL_ICONS,
   DEFAULT_GOAL_COLORS,
 } from "../../services/goalService";
+import CurrencyInput from "../CurrencyInput";
 
 /**
  * CreateGoalModal Component
@@ -42,7 +43,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
       if (editingGoal) {
         setFormData({
           name: editingGoal.name || "",
-          targetAmount: editingGoal.targetAmount?.toLocaleString("vi-VN") || "",
+          targetAmount: String(editingGoal.targetAmount || ""),
           deadline: editingGoal.deadline || "",
           icon: editingGoal.icon || "🎯",
           color: editingGoal.color || "#3B82F6",
@@ -60,9 +61,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
   }, [editingGoal, isOpen]);
 
   const handleSubmit = async () => {
-    // Loại bỏ tất cả dấu chấm và phẩy (phân cách nghìn VN)
-    const cleanedAmount = formData.targetAmount.replace(/[.,]/g, "");
-    const targetAmount = parseInt(cleanedAmount, 10);
+    const targetAmount = Number(formData.targetAmount);
 
     if (!formData.name || isNaN(targetAmount) || targetAmount <= 0) {
       return;
@@ -103,15 +102,13 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
           />
 
           {/* Số tiền mục tiêu */}
-          <Input
+          <CurrencyInput
             label="Số tiền mục tiêu"
             placeholder="VD: 30,000,000"
             value={formData.targetAmount}
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, "");
-              const formatted = new Intl.NumberFormat("vi-VN").format(value);
-              setFormData({ ...formData, targetAmount: formatted });
-            }}
+            onValueChange={(value) =>
+              setFormData({ ...formData, targetAmount: value })
+            }
             endContent={<span className="text-gray-400 text-sm">VND</span>}
             isRequired
           />
