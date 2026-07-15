@@ -15,7 +15,7 @@ import {
   useDisclosure,
   Chip,
 } from "@heroui/react";
-import { Plus, Pencil, Trash2, Landmark, Lock } from "lucide-react";
+import { Plus, Pencil, Trash as Trash2, Bank as Landmark, Lock } from "@phosphor-icons/react";
 import { useTransactionsContext } from "../../contexts/TransactionsContext";
 import * as paymentAccountApi from "../../services/paymentAccountApi";
 

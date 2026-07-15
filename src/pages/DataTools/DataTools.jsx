@@ -10,7 +10,7 @@
  */
 
 import { Tabs, Tab } from "@heroui/react";
-import { Database, Upload, Table2, Download, Settings, Landmark } from "lucide-react";
+import { Database, Upload, Table as Table2, Download, Gear as Settings, Bank as Landmark } from "@phosphor-icons/react";
 import { useDataTools } from "./useDataTools";
 import { PasteExcelTab, DirectInputTab, ExportTab } from "./tabs";
 import CategoryManager from "../../components/CategoryManager/CategoryManager";

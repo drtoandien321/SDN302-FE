@@ -1,4 +1,4 @@
-import { Receipt } from "lucide-react";
+import { Receipt } from "@phosphor-icons/react";
 import TransactionGroup from "./TransactionGroup";
 import { useTransactionList } from "./useTransactionList";
 import EmptyState from "../../ui/EmptyState";

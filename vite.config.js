@@ -35,6 +35,7 @@ export default defineConfig({
         clientsClaim: true,
         // Cache tất cả assets
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        maximumFileSizeToCacheInBytes: 10000000,
         // Không cache API động (REST Backend) trong service worker để tránh dữ liệu cũ
         runtimeCaching: [],
       },
@@ -52,7 +53,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           "react-vendor": ["react", "react-dom", "react-router-dom"],
-          "ui-vendor": ["@heroui/react", "framer-motion", "lucide-react"],
+          "ui-vendor": ["@heroui/react", "framer-motion", "@phosphor-icons/react"],
           "chart-vendor": ["recharts"],
           "utils-vendor": ["date-fns", "xlsx", "file-saver"],
           "ai-vendor": ["@google/generative-ai", "@google/genai"],

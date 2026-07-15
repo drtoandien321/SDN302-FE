@@ -12,19 +12,7 @@ import {
   SelectItem,
   Chip,
 } from "@heroui/react";
-import {
-  User,
-  Database,
-  Save,
-  Moon,
-  Sun,
-  LogOut,
-  ChevronRight,
-  Bell,
-  Wallet,
-  Landmark,
-  CheckCircle2,
-} from "lucide-react";
+import { User, Database, FloppyDisk as Save, Moon, Sun, SignOut as LogOut, CaretRight as ChevronRight, Bell, Wallet, Bank as Landmark, CheckCircle as CheckCircle2 } from "@phosphor-icons/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";

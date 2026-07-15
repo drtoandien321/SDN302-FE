@@ -1,36 +1,4 @@
-import {
-  Utensils,
-  Car,
-  ShoppingBag,
-  FileText,
-  Music,
-  Heart,
-  GraduationCap,
-  PiggyBank,
-  Wallet,
-  MoreHorizontal,
-  ShoppingCart,
-  Coffee,
-  Home,
-  Wrench,
-  Fuel,
-  Navigation,
-  CreditCard,
-  Gamepad2,
-  Film,
-  BookOpen,
-  Stethoscope,
-  Pill,
-  Lightbulb,
-  Zap,
-  Droplets,
-  Phone,
-  Briefcase,
-  Gift,
-  TrendingUp,
-  Users,
-  HandCoins,
-} from "lucide-react";
+import { ForkKnife as Utensils, Car, ShoppingBag, FileText, MusicNotes as Music, Heart, GraduationCap, PiggyBank, Wallet, DotsThree as MoreHorizontal, ShoppingCart, Coffee, House as Home, Wrench, GasPump as Fuel, NavigationArrow as Navigation, CreditCard, GameController as Gamepad2, FilmStrip as Film, BookOpen, Stethoscope, Pill, Lightbulb, Lightning as Zap, Drop as Droplets, Phone, Briefcase, Gift, TrendUp as TrendingUp, Users, Coins as HandCoins } from "@phosphor-icons/react";
 
 /**
  * Cấu trúc Category 2 cấp

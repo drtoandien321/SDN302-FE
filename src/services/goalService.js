@@ -68,8 +68,8 @@ export const deleteGoal = async (goalId) => {
 
 /** Icon mặc định cho mục tiêu */
 export const DEFAULT_GOAL_ICONS = [
-  "🎯", "📱", "💻", "🏠", "🚗", "✈️", "🎓", "💍",
-  "👶", "🏥", "🎸", "📸", "🎮", "👗", "⌚", "🎁",
+  "Target", "DeviceMobile", "Laptop", "House", "Car", "Airplane", "GraduationCap", "Diamond",
+  "Baby", "Hospital", "Guitar", "Camera", "GameController", "TShirt", "Watch", "Gift",
 ];
 
 /** Màu mặc định cho mục tiêu */

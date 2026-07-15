@@ -4,7 +4,7 @@
  */
 
 import { Card, CardBody, Button } from "@heroui/react";
-import { Plus, Save } from "lucide-react";
+import { Plus, FloppyDisk as Save } from "@phosphor-icons/react";
 import {
   DataInputRow,
   ValidationStatus,

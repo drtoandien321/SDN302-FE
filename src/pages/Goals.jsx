@@ -6,7 +6,7 @@
 import { useState } from "react";
 import { Button, Spinner } from "@heroui/react";
 import EmptyState from "../components/ui/EmptyState";
-import { Target, Plus, TrendingUp, CheckCircle2 } from "lucide-react";
+import { Target, Plus, TrendUp as TrendingUp, CheckCircle as CheckCircle2 } from "@phosphor-icons/react";
 import useGoals from "../hooks/useGoals";
 import GoalCard from "../components/Goals/GoalCard";
 import CreateGoalModal from "../components/Goals/CreateGoalModal";

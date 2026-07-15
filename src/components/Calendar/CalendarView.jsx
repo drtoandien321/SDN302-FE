@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Card, CardBody, CardHeader, Button, Chip } from "@heroui/react";
-import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight, Calendar } from "@phosphor-icons/react";
 import {
   format,
   startOfMonth,

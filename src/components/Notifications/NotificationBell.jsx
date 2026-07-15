@@ -5,7 +5,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@heroui/react";
-import { Bell, Wallet, Landmark, Trophy, CalendarClock } from "lucide-react";
+import { Bell, Wallet, Bank as Landmark, Trophy, Calendar as CalendarClock } from "@phosphor-icons/react";
 import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 import { useNotifications } from "../../contexts/NotificationContext";

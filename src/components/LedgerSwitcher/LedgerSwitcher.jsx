@@ -14,7 +14,7 @@ import {
   Input,
   useDisclosure,
 } from "@heroui/react";
-import { ChevronDown, Plus, Wallet, Pencil, Trash2 } from "lucide-react";
+import { CaretDown as ChevronDown, Plus, Wallet, Pencil, Trash as Trash2 } from "@phosphor-icons/react";
 import { useTransactionsContext } from "../../contexts/TransactionsContext";
 
 /**

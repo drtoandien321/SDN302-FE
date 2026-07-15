@@ -19,14 +19,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "@heroui/react";
-import {
-  MoreVertical,
-  Plus,
-  Pencil,
-  Trash2,
-  Target,
-  Calendar,
-} from "lucide-react";
+import { DotsThreeVertical as MoreVertical, Plus, Pencil, Trash as Trash2, Target, Calendar } from "@phosphor-icons/react";
+import CategoryIcon from "../ui/CategoryIcon";
 import { formatCurrency } from "../../utils/formatCurrency";
 import CurrencyInput from "../CurrencyInput";
 
@@ -91,11 +85,11 @@ const GoalCard = ({ goal, onAddMoney, onEdit, onDelete }) => {
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-3">
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                style={{ backgroundColor: `${goal.color}20` }}
-              >
-                {goal.icon || "🎯"}
-              </div>
+            className="w-12 h-12 rounded-[12px] flex items-center justify-center text-2xl flex-shrink-0"
+            style={{ backgroundColor: `${goal.color}20`, color: goal.color }}
+          >
+            <CategoryIcon icon={goal.icon} className="w-7 h-7" />
+          </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white">
                   {goal.name}

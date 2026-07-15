@@ -4,7 +4,7 @@
  */
 
 import { Card, CardBody, Button, Textarea } from "@heroui/react";
-import { Download, Upload, Save } from "lucide-react";
+import { Download, Upload, FloppyDisk as Save } from "@phosphor-icons/react";
 import { IMPORT_TEXTAREA_PLACEHOLDER } from "../constants";
 import {
   DataInputRow,

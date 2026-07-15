@@ -16,7 +16,7 @@ import {
   Spinner,
   useDisclosure,
 } from "@heroui/react";
-import { Plus, ShoppingCart, Trash2, ShoppingBag } from "lucide-react";
+import { Plus, ShoppingCart, Trash as Trash2, ShoppingBag } from "@phosphor-icons/react";
 import { useTransactionsContext } from "../../contexts/TransactionsContext";
 import { useAuth } from "../../contexts/AuthContext";
 import * as shoppingApi from "../../services/shoppingApi";

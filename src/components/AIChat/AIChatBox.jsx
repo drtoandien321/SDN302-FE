@@ -13,23 +13,7 @@ import {
   Chip,
   Divider,
 } from "@heroui/react";
-import {
-  Send,
-  X,
-  Trash2,
-  CheckCircle2,
-  XCircle,
-  HelpCircle,
-  Sparkles,
-  MessageSquare,
-  PlusCircle,
-  BarChart3,
-  FileText,
-  Clock,
-  Lightbulb,
-  Mic,
-  ImageIcon,
-} from "lucide-react";
+import { PaperPlaneRight as Send, X, Trash as Trash2, CheckCircle as CheckCircle2, XCircle, Question as HelpCircle, Sparkle as Sparkles, ChatCircle as MessageSquare, PlusCircle, ChartBar as BarChart3, FileText, Clock, Lightbulb, Microphone as Mic, Image as ImageIcon } from "@phosphor-icons/react";
 import { useAIChat } from "./useAIChat";
 import { useDisclosure } from "@heroui/react";
 import { formatCurrency } from "../../utils/formatCurrency";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LogOut, User, Shield, FileText } from "lucide-react";
+import { SignOut as LogOut, User, Shield, FileText } from "@phosphor-icons/react";
 import { useAuth } from "../contexts/AuthContext";
 import {
   Avatar,

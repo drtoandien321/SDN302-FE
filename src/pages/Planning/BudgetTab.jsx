@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@heroui/react";
-import { Plus, Wallet, AlertTriangle } from "lucide-react";
+import { Plus, Wallet, Warning as AlertTriangle } from "@phosphor-icons/react";
 import { useTransactionsContext } from "../../contexts/TransactionsContext";
 import { useBudgetContext } from "../../contexts/BudgetContext";
 import BudgetCard from "../../components/Budget/BudgetCard";

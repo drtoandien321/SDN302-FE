@@ -11,7 +11,7 @@ import {
   Radio,
   Textarea,
 } from "@heroui/react";
-import { User, DollarSign, Calendar, FileText } from "lucide-react";
+import { User, CurrencyDollar as DollarSign, Calendar, FileText } from "@phosphor-icons/react";
 
 /**
  * Modal tạo/sửa khoản nợ

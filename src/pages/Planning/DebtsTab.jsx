@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Spinner, Card, CardBody, Tabs, Tab } from "@heroui/react";
-import { Plus, HandCoins, TrendingDown, AlertTriangle } from "lucide-react";
+import { Plus, Coins as HandCoins, TrendDown as TrendingDown, Warning as AlertTriangle } from "@phosphor-icons/react";
 import { useDebts } from "../../contexts/DebtsContext";
 import DebtCard from "../../components/Debts/DebtCard";
 import CreateDebtModal from "../../components/Debts/CreateDebtModal";

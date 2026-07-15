@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { Home, AlertTriangle } from "lucide-react";
+import { House as Home, Warning as AlertTriangle } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {

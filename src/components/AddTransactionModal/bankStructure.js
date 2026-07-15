@@ -1,4 +1,4 @@
-import { Building2, Wallet, CreditCard } from "lucide-react";
+import { Buildings as Building2, Wallet, CreditCard } from "@phosphor-icons/react";
 
 /**
  * Cấu trúc thông tin ngân hàng/ví điện tử

@@ -1,11 +1,5 @@
 import { Tabs, Tab } from "@heroui/react";
-import {
-  PiggyBank,
-  ClipboardList,
-  Target,
-  HandCoins,
-  Trophy,
-} from "lucide-react";
+import { PiggyBank, ClipboardText as ClipboardList, Target, Coins as HandCoins, Trophy } from "@phosphor-icons/react";
 import { Suspense, lazy } from "react";
 import { Spinner } from "@heroui/react";
 import BudgetTab from "./BudgetTab"; // Use local BudgetTab

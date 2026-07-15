@@ -1,5 +1,5 @@
 import { Select, SelectItem, Input, Chip } from "@heroui/react";
-import { X } from "lucide-react";
+import { X } from "@phosphor-icons/react";
 import {
   BANK_LIST,
   getBankById,

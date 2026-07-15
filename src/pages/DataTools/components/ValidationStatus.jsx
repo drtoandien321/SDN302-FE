@@ -3,7 +3,7 @@
  * Dùng chung cho cả PasteExcelTab và DirectInputTab
  */
 
-import { CheckCircle2, XCircle } from "lucide-react";
+import { CheckCircle as CheckCircle2, XCircle } from "@phosphor-icons/react";
 
 /**
  * ValidationStatus - Hiển thị số lượng valid/invalid

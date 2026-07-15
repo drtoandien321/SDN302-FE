@@ -16,7 +16,7 @@ import {
   Select,
   SelectItem,
 } from "@heroui/react";
-import { Plus, Trophy, Flame, Target, Trash2, Calendar } from "lucide-react";
+import { Plus, Trophy, Fire as Flame, Target, Trash as Trash2, Calendar } from "@phosphor-icons/react";
 import { useChallenges } from "../../contexts/ChallengesContext";
 import { format, differenceInDays, parseISO } from "date-fns";
 import CurrencyInput from "../../components/CurrencyInput";

@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { Select, SelectItem, Input } from "@heroui/react";
-import { X, MoreHorizontal } from "lucide-react";
+import { X, DotsThree as MoreHorizontal } from "@phosphor-icons/react";
 import { useCategoryContext } from "../../contexts/CategoryContext";
+import CategoryIcon from "../ui/CategoryIcon";
 
 /**
  * Component chọn Category với hỗ trợ dynamic categories từ Firestore
@@ -107,7 +108,7 @@ const CategorySelector = ({ type, value, onChange, error }) => {
             const cat = findCategory(item.key);
             return (
               <div key={item.key} className="flex items-center gap-2">
-                {cat?.icon && <span className="text-base">{cat.icon}</span>}
+                {cat?.icon && <CategoryIcon icon={cat.icon} className="w-4 h-4 text-primary-500" />}
                 <span>{item.key}</span>
               </div>
             );
@@ -120,9 +121,9 @@ const CategorySelector = ({ type, value, onChange, error }) => {
             value={category.name}
             startContent={
               category.icon ? (
-                <span className="text-base">{category.icon}</span>
+                <CategoryIcon icon={category.icon} className="w-5 h-5 text-gray-500" />
               ) : (
-                <MoreHorizontal className="w-4 h-4" />
+                <MoreHorizontal className="w-5 h-5" />
               )
             }
           >

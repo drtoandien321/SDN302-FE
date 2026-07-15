@@ -8,7 +8,7 @@ import {
   Button,
   Input,
 } from "@heroui/react";
-import { DollarSign } from "lucide-react";
+import { CurrencyDollar as DollarSign } from "@phosphor-icons/react";
 
 /**
  * Modal ghi nhận thanh toán một phần khoản nợ

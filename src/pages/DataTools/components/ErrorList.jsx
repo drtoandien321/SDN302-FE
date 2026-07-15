@@ -4,7 +4,7 @@
  */
 
 import { Card, CardBody } from "@heroui/react";
-import { AlertCircle } from "lucide-react";
+import { WarningCircle as AlertCircle } from "@phosphor-icons/react";
 
 /**
  * ErrorList - Hiển thị các dòng có lỗi

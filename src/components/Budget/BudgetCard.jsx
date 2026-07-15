@@ -9,7 +9,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@heroui/react";
-import { MoreVertical, Edit2, Trash2, AlertTriangle } from "lucide-react";
+import { DotsThreeVertical as MoreVertical, PencilSimple as Edit2, Trash as Trash2, Warning as AlertTriangle } from "@phosphor-icons/react";
 import { getIconForCategory } from "../Transactions/TransactionList/constants";
 import { formatCurrency } from "../../utils/formatCurrency";
 

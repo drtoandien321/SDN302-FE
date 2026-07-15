@@ -6,11 +6,12 @@ import {
   DropdownItem,
   Button,
 } from "@heroui/react";
-import { MoreVertical, Edit, Trash2, Package } from "lucide-react";
+import { DotsThreeVertical as MoreVertical, PencilSimple as Edit, Trash as Trash2, Package } from "@phosphor-icons/react";
 import { formatCurrency } from "../../../utils/formatCurrency";
 import DeleteConfirmModal from "../../DeleteConfirmModal";
 import TransactionDetailModal from "./TransactionDetailModal";
 import { useCategoryContext } from "../../../contexts/CategoryContext";
+import CategoryIcon from "../../ui/CategoryIcon";
 
 /**
  * Component hiển thị một giao dịch đơn lẻ
@@ -48,12 +49,12 @@ const TransactionItem = ({ transaction, onEdit, onDelete }) => {
         onClick={() => setIsDetailModalOpen(true)}
       >
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          {/* Emoji Icon với background color từ category */}
+          {/* Icon với background color từ category */}
           <div
             className="w-10 h-10 rounded-[10px] flex items-center justify-center text-lg flex-shrink-0"
-            style={{ backgroundColor: `${categoryColor}20` }}
+            style={{ backgroundColor: `${categoryColor}20`, color: categoryColor }}
           >
-            {categoryEmoji}
+            <CategoryIcon icon={categoryEmoji} className="w-6 h-6" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-medium text-gray-900 dark:text-white truncate">

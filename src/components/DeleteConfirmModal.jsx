@@ -6,7 +6,7 @@ import {
   ModalFooter,
   Button,
 } from "@heroui/react";
-import { AlertTriangle } from "lucide-react";
+import { Warning as AlertTriangle } from "@phosphor-icons/react";
 
 /**
  * Modal xác nhận xóa giao dịch hoặc item khác

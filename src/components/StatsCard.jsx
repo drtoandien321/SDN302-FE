@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Wallet } from "lucide-react";
+import { TrendUp as TrendingUp, TrendDown as TrendingDown, Wallet } from "@phosphor-icons/react";
 import MetricTile from "./ui/MetricTile";
 
 /**

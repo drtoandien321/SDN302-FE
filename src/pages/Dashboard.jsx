@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Tabs, Tab } from "@heroui/react";
-import { List, Calendar as CalendarIcon } from "lucide-react";
+import { List, Calendar as CalendarIcon } from "@phosphor-icons/react";
 import StatsCards from "../components/StatsCard";
 import TransactionList from "../components/Transactions/TransactionList/TransactionList";
 import CalendarView from "../components/Calendar/CalendarView";

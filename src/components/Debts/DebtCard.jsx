@@ -1,5 +1,5 @@
 import { Card, CardBody, Chip, Progress, Button, Tooltip } from "@heroui/react";
-import { Calendar, User, Edit2, Trash2, DollarSign } from "lucide-react";
+import { Calendar, User, PencilSimple as Edit2, Trash as Trash2, CurrencyDollar as DollarSign } from "@phosphor-icons/react";
 import { format, differenceInDays, parseISO } from "date-fns";
 import { vi } from "date-fns/locale";
 

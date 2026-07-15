@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@heroui/react";
-import { RefreshCcw, AlertOctagon } from "lucide-react";
+import { ArrowsClockwise as RefreshCcw, WarningOctagon as AlertOctagon } from "@phosphor-icons/react";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

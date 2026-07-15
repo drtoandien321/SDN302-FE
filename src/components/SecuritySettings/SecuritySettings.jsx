@@ -9,7 +9,7 @@ import {
   Button,
   Divider,
 } from "@heroui/react";
-import { ShieldCheck, LogOut, Monitor } from "lucide-react";
+import { ShieldCheck, SignOut as LogOut, Monitor } from "@phosphor-icons/react";
 import { useAuth } from "../../contexts/AuthContext";
 import * as authApi from "../../services/authApi";
 

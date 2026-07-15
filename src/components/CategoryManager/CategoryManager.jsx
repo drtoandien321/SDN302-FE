@@ -15,14 +15,7 @@ import {
   Tabs,
   Tab,
 } from "@heroui/react";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  Tag,
-  ArrowDownCircle,
-  ArrowUpCircle,
-} from "lucide-react";
+import { Plus, Pencil, Trash as Trash2, Tag, ArrowCircleDown as ArrowDownCircle, ArrowCircleUp as ArrowUpCircle } from "@phosphor-icons/react";
 import { useCategoryContext } from "../../contexts/CategoryContext";
 
 // Bảng màu có sẵn để chọn
@@ -47,56 +40,7 @@ const COLOR_PALETTE = [
   "#64748B",
 ];
 
-// Danh sách emoji phổ biến
-const EMOJI_LIST = [
-  "🍜",
-  "🍕",
-  "🍔",
-  "☕",
-  "🥗",
-  "🍳",
-  "🚗",
-  "🚌",
-  "🚕",
-  "✈️",
-  "🚇",
-  "⛽",
-  "🛒",
-  "👕",
-  "👟",
-  "💄",
-  "🎁",
-  "📱",
-  "🎬",
-  "🎮",
-  "🎵",
-  "📖",
-  "🏋️",
-  "⚽",
-  "💊",
-  "🏥",
-  "🦷",
-  "💉",
-  "📚",
-  "🎓",
-  "💻",
-  "📝",
-  "📄",
-  "💡",
-  "🏠",
-  "💧",
-  "📞",
-  "💰",
-  "💵",
-  "🎁",
-  "📈",
-  "🏪",
-  "💳",
-  "📦",
-  "🔧",
-  "🎯",
-  "⭐",
-];
+import CategoryIcon, { PHOSPHOR_ICON_NAMES } from "../ui/CategoryIcon";
 
 /**
  * Component Quản Lý Danh Mục
@@ -179,9 +123,9 @@ const CategoryManager = () => {
           <div className="flex items-center gap-3">
             <span
               className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
-              style={{ backgroundColor: `${cat.color}20` }}
+              style={{ backgroundColor: `${cat.color}20`, color: cat.color }}
             >
-              {cat.icon}
+              <CategoryIcon icon={cat.icon} className="w-6 h-6" />
             </span>
             <span className="font-medium text-slate-700 dark:text-slate-200">
               {cat.name}
@@ -295,20 +239,20 @@ const CategoryManager = () => {
                     Chọn biểu tượng
                   </p>
                   <div className="grid grid-cols-10 gap-1 max-h-32 overflow-y-auto">
-                    {EMOJI_LIST.map((emoji) => (
+                    {PHOSPHOR_ICON_NAMES.map((iconName) => (
                       <button
-                        key={emoji}
+                        key={iconName}
                         type="button"
                         onClick={() =>
-                          setFormData((prev) => ({ ...prev, icon: emoji }))
+                          setFormData((prev) => ({ ...prev, icon: iconName }))
                         }
-                        className={`w-8 h-8 text-lg rounded-md flex items-center justify-center transition-all ${
-                          formData.icon === emoji
-                            ? "bg-primary-100 dark:bg-primary-900 ring-2 ring-primary-500"
-                            : "hover:bg-slate-100 dark:hover:bg-slate-700"
+                        className={`w-8 h-8 rounded-md flex items-center justify-center transition-all ${
+                          formData.icon === iconName
+                            ? "bg-primary-100 dark:bg-primary-900 ring-2 ring-primary-500 text-primary-600"
+                            : "hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                         }`}
                       >
-                        {emoji}
+                        <CategoryIcon icon={iconName} className="w-5 h-5" />
                       </button>
                     ))}
                   </div>
@@ -342,9 +286,9 @@ const CategoryManager = () => {
                 <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <span
                     className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
-                    style={{ backgroundColor: `${formData.color}20` }}
+                    style={{ backgroundColor: `${formData.color}20`, color: formData.color }}
                   >
-                    {formData.icon}
+                    <CategoryIcon icon={formData.icon} className="w-6 h-6" />
                   </span>
                   <span className="font-medium text-slate-700 dark:text-slate-200">
                     {formData.name || "Tên danh mục"}

@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { RefreshCcw } from "lucide-react";
+import { ArrowsClockwise as RefreshCcw } from "@phosphor-icons/react";
 import { useTransactionsContext } from "../contexts/TransactionsContext";
 
 /**

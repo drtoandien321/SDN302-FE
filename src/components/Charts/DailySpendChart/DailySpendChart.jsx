@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { formatCurrency } from "../../../utils/formatCurrency";
-import { FolderOpen } from "lucide-react";
+import { FolderOpen } from "@phosphor-icons/react";
 import { useDailyChartData } from "./useDailyChartData";
 
 /**

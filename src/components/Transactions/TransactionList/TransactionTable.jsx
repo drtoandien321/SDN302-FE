@@ -11,13 +11,14 @@ import {
   Card,
   CardBody,
 } from "@heroui/react";
-import { Edit, Trash2 } from "lucide-react";
+import { PencilSimple as Edit, Trash as Trash2 } from "@phosphor-icons/react";
 import { formatCurrency } from "../../../utils/formatCurrency";
 import { useTransactionTable, formatTableDate } from "./useTransactionTable";
 import { useCategoryContext } from "../../../contexts/CategoryContext";
 import DeleteConfirmModal from "../../DeleteConfirmModal";
 import TransactionDetailModal from "./TransactionDetailModal";
 import { useState } from "react";
+import CategoryIcon from "../../ui/CategoryIcon";
 
 /**
  * Component hiển thị danh sách giao dịch dạng bảng
@@ -159,7 +160,7 @@ const TransactionTable = ({ transactions, onEdit, onDelete }) => {
                       </span>
                       {/* Hiển thị category trên mobile */}
                       <div className="flex items-center gap-1 sm:hidden mt-1">
-                        <span className="text-sm">{categoryEmoji}</span>
+                        <span className="text-sm text-gray-500"><CategoryIcon icon={categoryEmoji} className="w-4 h-4" /></span>
                         <span className="text-xs text-gray-600 dark:text-gray-400 truncate">
                           {categoryDisplay}
                         </span>
@@ -168,7 +169,7 @@ const TransactionTable = ({ transactions, onEdit, onDelete }) => {
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     <div className="flex items-center gap-2">
-                      <span className="text-lg">{categoryEmoji}</span>
+                      <span className="text-lg text-gray-500 dark:text-gray-400"><CategoryIcon icon={categoryEmoji} className="w-5 h-5" /></span>
                       <div className="flex flex-col">
                         <span className="text-sm font-medium text-gray-900 dark:text-white">
                           {categoryDisplay}

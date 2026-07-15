@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Spinner } from "@heroui/react";
-import { Camera, AlertCircle } from "lucide-react";
+import { Camera, WarningCircle as AlertCircle } from "@phosphor-icons/react";
 import * as aiApi from "../../services/aiApi";
 
 /** Chuyển File ảnh -> { base64, mimeType } (không kèm prefix "data:...;base64,"). */

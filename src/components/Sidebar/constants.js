@@ -1,4 +1,4 @@
-import { LayoutDashboard, PieChart, Database, PiggyBank } from "lucide-react";
+import { SquaresFour as LayoutDashboard, ChartPie as PieChart, Database, PiggyBank } from "@phosphor-icons/react";
 
 /**
  * Tên ứng dụng hiển thị trên Sidebar

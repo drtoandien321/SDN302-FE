@@ -4,7 +4,7 @@
  */
 
 import { Input, Select, SelectItem, Button, Chip } from "@heroui/react";
-import { Trash2 } from "lucide-react";
+import { Trash as Trash2 } from "@phosphor-icons/react";
 import {
   INCOME_CATEGORIES,
   EXPENSE_CATEGORIES,

@@ -1,0 +1,1 @@
+const fs = require('fs'); let content = fs.readFileSync('src/pages/Login.jsx', 'utf8'); content = content.replace(/p-8 md:p-10/g, 'p-6 md:p-8').replace(/space-y-5/g, 'space-y-4').replace(/space-y-3 text-center lg:hidden mb-8/g, 'space-y-2 text-center lg:hidden mb-6'); fs.writeFileSync('src/pages/Login.jsx', content);

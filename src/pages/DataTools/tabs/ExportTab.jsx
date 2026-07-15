@@ -4,13 +4,7 @@
  */
 
 import { Button, Chip } from "@heroui/react";
-import {
-  Download,
-  FileSpreadsheet,
-  Copy,
-  FileText,
-  ExternalLink,
-} from "lucide-react";
+import { Download, FileXls as FileSpreadsheet, Copy, FileText, ArrowSquareOut as ExternalLink } from "@phosphor-icons/react";
 import { ResultNotification } from "../components";
 
 /**

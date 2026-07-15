@@ -12,12 +12,13 @@ import {
   Input,
   Button,
 } from "@heroui/react";
-import { Target } from "lucide-react";
+import { Target } from "@phosphor-icons/react";
 import {
   DEFAULT_GOAL_ICONS,
   DEFAULT_GOAL_COLORS,
 } from "../../services/goalService";
 import CurrencyInput from "../CurrencyInput";
+import CategoryIcon from "../ui/CategoryIcon";
 
 /**
  * CreateGoalModal Component
@@ -31,7 +32,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
     name: "",
     targetAmount: "",
     deadline: "",
-    icon: "🎯",
+    icon: "Target",
     color: "#3B82F6",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +46,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
           name: editingGoal.name || "",
           targetAmount: String(editingGoal.targetAmount || ""),
           deadline: editingGoal.deadline || "",
-          icon: editingGoal.icon || "🎯",
+          icon: editingGoal.icon || "Target",
           color: editingGoal.color || "#3B82F6",
         });
       } else {
@@ -53,7 +54,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
           name: "",
           targetAmount: "",
           deadline: "",
-          icon: "🎯",
+          icon: "Target",
           color: "#3B82F6",
         });
       }
@@ -140,7 +141,7 @@ const CreateGoalModal = ({ isOpen, onClose, onSave, editingGoal = null }) => {
                       : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
                   }`}
                 >
-                  {icon}
+                  <CategoryIcon icon={icon} className="w-6 h-6" />
                 </button>
               ))}
             </div>

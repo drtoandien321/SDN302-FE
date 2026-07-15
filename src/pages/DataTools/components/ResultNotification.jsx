@@ -4,7 +4,7 @@
  */
 
 import { Card, CardBody, Button } from "@heroui/react";
-import { CheckCircle2, XCircle, ExternalLink } from "lucide-react";
+import { CheckCircle as CheckCircle2, XCircle, ArrowSquareOut as ExternalLink } from "@phosphor-icons/react";
 
 /**
  * ResultNotification - Hiển thị kết quả thành công/thất bại

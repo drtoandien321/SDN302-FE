@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { Plus, Wallet, Sparkles } from "lucide-react";
+import { Plus, Wallet, Sparkle as Sparkles } from "@phosphor-icons/react";
 import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";

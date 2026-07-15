@@ -1,5 +1,5 @@
 import { Input, Select, SelectItem, Button, Chip } from "@heroui/react";
-import { Search, X, Filter } from "lucide-react";
+import { MagnifyingGlass as Search, X, Faders as Filter } from "@phosphor-icons/react";
 
 /**
  * Component thanh filter cho danh sách giao dịch

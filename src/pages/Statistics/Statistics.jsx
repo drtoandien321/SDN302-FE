@@ -10,15 +10,7 @@ import { useStatisticsFilter } from "./useStatisticsFilter";
 import TrendLineChart from "../../components/Charts/TrendLineChart/TrendLineChart";
 import { Card, CardBody, CardHeader, ButtonGroup, Button } from "@heroui/react";
 import * as analyticsApi from "../../services/analyticsApi";
-import {
-  BarChart3,
-  TrendingUp,
-  TrendingDown,
-  Wallet,
-  Receipt,
-  PieChart,
-  Activity,
-} from "lucide-react";
+import { ChartBar as BarChart3, TrendUp as TrendingUp, TrendDown as TrendingDown, Wallet, Receipt, ChartPie as PieChart, Heartbeat as Activity } from "@phosphor-icons/react";
 import PageHeader from "../../components/ui/PageHeader";
 import SectionHeader from "../../components/ui/SectionHeader";
 import MetricTile from "../../components/ui/MetricTile";

@@ -1,5 +1,5 @@
 import { Tabs, Tab } from "@heroui/react";
-import { List, Table as TableIcon } from "lucide-react";
+import { List, Table as TableIcon } from "@phosphor-icons/react";
 import TransactionListView from "./TransactionListView";
 import TransactionTable from "./TransactionTable";
 import TransactionFilterBar from "./TransactionFilterBar";
