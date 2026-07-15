@@ -99,8 +99,10 @@ async function refreshAccessToken() {
   if (refreshPromise) return refreshPromise;
 
   refreshPromise = (async () => {
+    // Ghi nhớ đúng phiên đã khởi tạo request refresh. Trong lúc chờ BE,
+    // người dùng có thể đăng nhập Google và thay toàn bộ token bằng phiên mới.
+    const refreshToken = getRefreshToken();
     try {
-      const refreshToken = getRefreshToken();
       // Không có refresh token -> không thể làm mới phiên.
       if (!refreshToken) return null;
 
@@ -116,6 +118,11 @@ async function refreshAccessToken() {
       }
       const tokens = payload.data?.tokens;
       if (tokens) {
+        // Một login/logout khác đã thay phiên trong lúc request này đang chạy.
+        // Không được để response refresh cũ ghi đè token của phiên mới.
+        if (getRefreshToken() !== refreshToken) {
+          return getAccessToken();
+        }
         setTokens(tokens); // lưu access + refresh token đã xoay vòng
         return tokens.accessToken;
       }
@@ -149,9 +156,11 @@ async function request(method, path, options = {}, _retry = false) {
   if (body !== undefined && !(body instanceof FormData)) {
     finalHeaders["Content-Type"] = "application/json";
   }
-  if (auth) {
-    const token = getAccessToken();
-    if (token) finalHeaders.Authorization = `Bearer ${token}`;
+  // Ghi nhớ access token đã dùng để response 401 của một phiên cũ không thể
+  // xoá phiên mới vừa được tạo bởi Google/email login chạy song song.
+  const requestAccessToken = auth ? getAccessToken() : null;
+  if (requestAccessToken) {
+    finalHeaders.Authorization = `Bearer ${requestAccessToken}`;
   }
 
   const fetchOptions = {
@@ -216,6 +225,14 @@ async function request(method, path, options = {}, _retry = false) {
     if (newAccess) {
       return request(method, path, options, true);
     }
+
+    // Nếu token đã đổi kể từ lúc request bắt đầu thì một auth action khác đã
+    // tạo phiên mới. Thử lại bằng phiên đó thay vì xoá nhầm token mới.
+    const currentAccessToken = getAccessToken();
+    if (currentAccessToken && currentAccessToken !== requestAccessToken) {
+      return request(method, path, options, true);
+    }
+
     clearTokens();
     emitLogout();
   }

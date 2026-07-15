@@ -4,6 +4,7 @@ import {
   useEffect,
   useState,
   useCallback,
+  useRef,
 } from "react";
 import * as authApi from "../services/authApi";
 import { hasSession, getCachedUser } from "../services/tokenStore";
@@ -27,9 +28,13 @@ export const AuthProvider = ({ children }) => {
   const [settings, setSettings] = useState(null);
   const [defaultLedger, setDefaultLedger] = useState(null);
   const [loading, setLoading] = useState(true);
+  // Tăng mỗi khi có auth action chủ động (login/logout). Kết quả bootstrap cũ
+  // chỉ được cập nhật state nếu nó vẫn thuộc đúng thế hệ phiên hiện tại.
+  const authGenerationRef = useRef(0);
 
   /** Tải lại thông tin user hiện tại từ BE để xác thực phiên. */
   const refreshUser = useCallback(async () => {
+    const generation = authGenerationRef.current;
     if (!hasSession()) {
       setCurrentUser(null);
       setLoading(false);
@@ -37,16 +42,21 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const { user, settings: s, defaultLedger: dl } = await authApi.fetchMe();
+      if (generation !== authGenerationRef.current) return null;
       setCurrentUser(user);
       setSettings(s);
       setDefaultLedger(dl);
       return user;
     } catch {
       // Token không hợp lệ / không refresh được -> coi như đã đăng xuất
-      setCurrentUser(null);
+      if (generation === authGenerationRef.current) {
+        setCurrentUser(null);
+      }
       return null;
     } finally {
-      setLoading(false);
+      if (generation === authGenerationRef.current) {
+        setLoading(false);
+      }
     }
   }, []);
 
@@ -58,9 +68,11 @@ export const AuthProvider = ({ children }) => {
   // Lắng nghe sự kiện logout phát ra từ apiClient khi refresh token thất bại
   useEffect(() => {
     const onForcedLogout = () => {
+      authGenerationRef.current += 1;
       setCurrentUser(null);
       setSettings(null);
       setDefaultLedger(null);
+      setLoading(false);
     };
     window.addEventListener(AUTH_LOGOUT_EVENT, onForcedLogout);
     return () => window.removeEventListener(AUTH_LOGOUT_EVENT, onForcedLogout);
@@ -68,43 +80,51 @@ export const AuthProvider = ({ children }) => {
 
   /* ----------------------------- Auth actions ----------------------------- */
 
-  const loginWithEmail = useCallback(async (credentials) => {
-    const user = await authApi.loginEmail(credentials);
+  const beginAuthAction = useCallback(() => {
+    authGenerationRef.current += 1;
+    // Public login vẫn có thể được thao tác khi bootstrap phiên cũ đang chạy.
+    // Auth action mới trở thành nguồn sự thật và không phải chờ bootstrap nữa.
+    setLoading(false);
+    return authGenerationRef.current;
+  }, []);
+
+  const hydrateAuthenticatedUser = useCallback(async (user, generation) => {
+    if (generation !== authGenerationRef.current) return user;
+
     setCurrentUser(user);
-    // Lấy thêm settings + ledger mặc định ngay sau khi đăng nhập
-    await authApi.fetchMe().then(({ settings: s, defaultLedger: dl }) => {
+    const { settings: s, defaultLedger: dl } = await authApi.fetchMe();
+    if (generation === authGenerationRef.current) {
       setSettings(s);
       setDefaultLedger(dl);
-    });
+    }
     return user;
   }, []);
+
+  const loginWithEmail = useCallback(async (credentials) => {
+    const generation = beginAuthAction();
+    const user = await authApi.loginEmail(credentials);
+    return hydrateAuthenticatedUser(user, generation);
+  }, [beginAuthAction, hydrateAuthenticatedUser]);
 
   const verifyOtp = useCallback(async (payload) => {
+    const generation = beginAuthAction();
     const user = await authApi.verifyEmailOtp(payload);
-    setCurrentUser(user);
-    await authApi.fetchMe().then(({ settings: s, defaultLedger: dl }) => {
-      setSettings(s);
-      setDefaultLedger(dl);
-    });
-    return user;
-  }, []);
+    return hydrateAuthenticatedUser(user, generation);
+  }, [beginAuthAction, hydrateAuthenticatedUser]);
 
   const loginWithGoogle = useCallback(async (idToken) => {
+    const generation = beginAuthAction();
     const user = await authApi.loginWithGoogle(idToken);
-    setCurrentUser(user);
-    await authApi.fetchMe().then(({ settings: s, defaultLedger: dl }) => {
-      setSettings(s);
-      setDefaultLedger(dl);
-    });
-    return user;
-  }, []);
+    return hydrateAuthenticatedUser(user, generation);
+  }, [beginAuthAction, hydrateAuthenticatedUser]);
 
   const logout = useCallback(async () => {
+    beginAuthAction();
     await authApi.logout();
     setCurrentUser(null);
     setSettings(null);
     setDefaultLedger(null);
-  }, []);
+  }, [beginAuthAction]);
 
   /** Cập nhật hồ sơ (displayName, avatarUrl, locale, timezone, settings). */
   const updateUserProfile = useCallback(async (data) => {
