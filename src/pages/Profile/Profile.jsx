@@ -12,7 +12,7 @@ import {
   SelectItem,
   Chip,
 } from "@heroui/react";
-import { User, Database, FloppyDisk as Save, Moon, Sun, SignOut as LogOut, CaretRight as ChevronRight, Bell, Wallet, Bank as Landmark, CheckCircle as CheckCircle2 } from "@phosphor-icons/react";
+import { User, Database, FloppyDisk as Save, Moon, Sun, SignOut as LogOut, CaretRight as ChevronRight, Bell, Wallet, Bank as Landmark, CheckCircle as CheckCircle2, Trophy, Star, Medal } from "@phosphor-icons/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
@@ -180,30 +180,33 @@ const Profile = () => {
       )}
 
       {/* 1. Thông tin cá nhân */}
-      <Card className="border border-divider shadow-none" radius="lg">
-        <CardHeader className="bg-content2 px-6 py-4 border-b border-divider">
-          <div className="flex items-center gap-2">
-            <User className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">
-              Thông tin cá nhân
-            </h2>
-          </div>
-        </CardHeader>
-        <CardBody className="p-6 space-y-6">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-            {/* Avatar Section */}
-            <div className="flex-shrink-0">
+      <Card className="border border-divider shadow-none overflow-hidden" radius="lg">
+        {/* Cover Photo */}
+        <div className="h-32 w-full bg-gradient-to-r from-primary-500/80 via-purple-500/80 to-pink-500/80 relative">
+          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
+        </div>
+        <CardBody className="p-6 pt-0 relative">
+          <div className="flex flex-col sm:flex-row gap-6 relative">
+            {/* Avatar Section (Nâng lên trên cover) */}
+            <div className="flex-shrink-0 -mt-12 text-center sm:text-left">
               <Avatar
                 src={avatarUrl || currentUser?.photoURL}
                 name={displayName}
-                className="w-24 h-24 text-2xl font-bold"
-                isBordered
+                className="w-28 h-28 text-3xl font-bold border-4 border-background shadow-xl"
                 color="primary"
               />
+              <div className="mt-4 flex gap-2 justify-center sm:justify-start">
+                <div className="flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-1 rounded-md text-xs font-semibold" title="Người dùng Tích cực">
+                  <Star weight="duotone" className="w-4 h-4" /> Bạc
+                </div>
+                <div className="flex items-center gap-1 bg-purple-500/10 text-purple-500 px-2 py-1 rounded-md text-xs font-semibold" title="Tiết kiệm giỏi">
+                  <Trophy weight="duotone" className="w-4 h-4" /> 5 Mục tiêu
+                </div>
+              </div>
             </div>
 
             {/* Edit Info Form */}
-            <div className="flex-1 w-full space-y-4">
+            <div className="flex-1 w-full space-y-4 pt-4 sm:pt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Tên hiển thị"

@@ -29,9 +29,20 @@ function Dashboard() {
    */
   const greetingText = useMemo(() => {
     const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) return "Chào buổi sáng";
-    if (hour >= 12 && hour < 18) return "Chào buổi chiều";
-    return "Chào buổi tối";
+    let greeting = "";
+    let quote = "";
+    
+    if (hour >= 5 && hour < 12) {
+      greeting = "Chào buổi sáng 🌤️";
+      quote = "Khởi đầu ngày mới, đừng quên ghi chép chi tiêu nhé!";
+    } else if (hour >= 12 && hour < 18) {
+      greeting = "Chào buổi chiều ☕";
+      quote = "Một buổi chiều năng suất, tài chính minh bạch.";
+    } else {
+      greeting = "Chào buổi tối 🌙";
+      quote = "Đã đến lúc nghỉ ngơi và nhìn lại tài chính hôm nay.";
+    }
+    return { greeting, quote };
   }, []);
 
   /**
@@ -64,13 +75,11 @@ function Dashboard() {
     >
       {/* Header */}
       <PageHeader
-        eyebrow={`${greetingText} · ${format(new Date(), "EEEE, dd MMMM yyyy", {
+        eyebrow={`${greetingText.greeting} · ${format(new Date(), "EEEE, dd MMMM yyyy", {
           locale: vi,
         })}`}
         title="Tổng quan tài chính"
-        subtitle={`${monthStats.transactionCount} giao dịch tháng này · trung bình ~${new Intl.NumberFormat(
-          "vi-VN"
-        ).format(monthStats.avgDaily)} VND/ngày`}
+        subtitle={greetingText.quote}
         actions={
           <>
             <ThemeButton />

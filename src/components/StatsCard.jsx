@@ -1,5 +1,6 @@
-import { TrendUp as TrendingUp, TrendDown as TrendingDown, Wallet } from "@phosphor-icons/react";
+import { TrendUp as TrendingUp, TrendDown as TrendingDown } from "@phosphor-icons/react";
 import MetricTile from "./ui/MetricTile";
+import CreditCardBalance from "./ui/CreditCardBalance";
 
 /**
  * StatsCards — ba chỉ số tổng quan với PHÂN CẤP rõ ràng:
@@ -16,16 +17,8 @@ const StatsCards = ({ totalIncome, totalExpense, balance }) => {
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Bề mặt chính: Số dư */}
-      <MetricTile
-        variant="primary"
-        label="Số dư khả dụng"
-        value={balance}
-        tone="neutral"
-        icon={Wallet}
-        sign={balanceNegative ? "−" : ""}
-        hint={balanceNegative ? "Đang âm trong kỳ" : "Trong kỳ hiện tại"}
-      />
+      {/* Bề mặt chính: Số dư Credit Card */}
+      <CreditCardBalance balance={balance} isNegative={balanceNegative} />
 
       {/* Chỉ số phụ */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4">

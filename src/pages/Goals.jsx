@@ -12,6 +12,7 @@ import GoalCard from "../components/Goals/GoalCard";
 import CreateGoalModal from "../components/Goals/CreateGoalModal";
 import DeleteConfirmModal from "../components/DeleteConfirmModal";
 import { formatCurrency } from "../utils/formatCurrency";
+import { motion } from "framer-motion";
 
 const Goals = () => {
   const {
@@ -57,6 +58,19 @@ const Goals = () => {
       </div>
     );
   }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
 
   return (
     <div className="space-y-6 pb-24 md:pb-6">
@@ -117,20 +131,21 @@ const Goals = () => {
             <TrendingUp className="w-5 h-5 text-amber-500" />
             Đang thực hiện ({activeGoals.length})
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {activeGoals.map((goal) => (
-              <GoalCard
-                key={goal.id}
-                goal={goal}
-                onAddMoney={addMoney}
-                onEdit={(g) => {
-                  setEditingGoal(g);
-                  setIsCreateOpen(true);
-                }}
-                onDelete={(g) => setDeletingGoal(g)}
-              />
+              <motion.div key={goal.id} variants={itemVariants}>
+                <GoalCard
+                  goal={goal}
+                  onAddMoney={addMoney}
+                  onEdit={(g) => {
+                    setEditingGoal(g);
+                    setIsCreateOpen(true);
+                  }}
+                  onDelete={(g) => setDeletingGoal(g)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
 
@@ -141,20 +156,21 @@ const Goals = () => {
             <CheckCircle2 className="w-5 h-5 text-green-500" />
             Đã hoàn thành ({completedGoals.length})
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {completedGoals.map((goal) => (
-              <GoalCard
-                key={goal.id}
-                goal={goal}
-                onAddMoney={addMoney}
-                onEdit={(g) => {
-                  setEditingGoal(g);
-                  setIsCreateOpen(true);
-                }}
-                onDelete={(g) => setDeletingGoal(g)}
-              />
+              <motion.div key={goal.id} variants={itemVariants}>
+                <GoalCard
+                  goal={goal}
+                  onAddMoney={addMoney}
+                  onEdit={(g) => {
+                    setEditingGoal(g);
+                    setIsCreateOpen(true);
+                  }}
+                  onDelete={(g) => setDeletingGoal(g)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
 
