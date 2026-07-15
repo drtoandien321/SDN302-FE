@@ -9,29 +9,7 @@ import {
   INCOME_CATEGORIES,
   EXPENSE_CATEGORIES,
 } from "../../../components/AddTransactionModal/constants";
-
-/**
- * Format số tiền khi nhập (thêm dấu chấm phân cách)
- * @param {string} value - Giá trị nhập
- * @returns {string} - Giá trị đã format
- */
-const formatInputAmount = (value) => {
-  // Loại bỏ tất cả ký tự không phải số
-  const numericValue = value.replace(/[^\d]/g, "");
-  if (!numericValue) return "";
-  // Format với dấu chấm phân cách hàng nghìn
-  return Number(numericValue).toLocaleString("vi-VN");
-};
-
-/**
- * Parse số tiền từ input đã format
- * @param {string} value - Giá trị đã format
- * @returns {number} - Số nguyên
- */
-const parseInputAmount = (value) => {
-  const numericValue = value.replace(/[^\d]/g, "");
-  return numericValue ? parseInt(numericValue, 10) : 0;
-};
+import CurrencyInput from "../../../components/CurrencyInput";
 
 /**
  * DataInputRow - Một hàng trong bảng nhập dữ liệu
@@ -82,16 +60,12 @@ const DataInputRow = ({ item, onUpdate, onRemove }) => {
 
       {/* Số tiền - với VND suffix */}
       <div className="col-span-2">
-        <Input
-          type="text"
+        <CurrencyInput
           size="sm"
           variant="bordered"
           placeholder="0"
-          value={item.amount ? formatInputAmount(item.amount.toString()) : ""}
-          onChange={(e) => {
-            const parsed = parseInputAmount(e.target.value);
-            onUpdate(item.id, { amount: parsed });
-          }}
+          value={item.amount || ""}
+          onValueChange={(value) => onUpdate(item.id, { amount: value })}
           endContent={
             <span className="text-xs text-gray-400 font-medium">VND</span>
           }

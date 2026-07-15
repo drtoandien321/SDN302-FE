@@ -249,7 +249,10 @@ export const useDataTools = () => {
         rows.map((row, index) => ({
           id: `paste-${index}-${Date.now()}`,
           rowNumber: index + 1,
-          date: row.date,
+          // HTML input[type="date"] chỉ hiển thị giá trị ISO yyyy-MM-dd.
+          // Dữ liệu paste vẫn được gửi nguyên bản cho BE validate ở trên,
+          // còn preview dùng giá trị đã chuẩn hoá để không hiện ô ngày trống.
+          date: parseDate(row.date) || "",
           amount: row.amount,
           category: row.category,
           note: row.note,
