@@ -91,11 +91,19 @@ export const AuthProvider = ({ children }) => {
   const hydrateAuthenticatedUser = useCallback(async (user, generation) => {
     if (generation !== authGenerationRef.current) return user;
 
+    // Đăng nhập coi như đã thành công ngay khi có `user` (token đã được lưu).
+    // Việc lấy thêm settings/defaultLedger chỉ là bổ sung - nếu lệnh gọi này
+    // lỗi/timeout (vd. BE cold-start), không được làm hỏng cả luồng đăng nhập
+    // và chặn điều hướng về trang chủ.
     setCurrentUser(user);
-    const { settings: s, defaultLedger: dl } = await authApi.fetchMe();
-    if (generation === authGenerationRef.current) {
-      setSettings(s);
-      setDefaultLedger(dl);
+    try {
+      const { settings: s, defaultLedger: dl } = await authApi.fetchMe();
+      if (generation === authGenerationRef.current) {
+        setSettings(s);
+        setDefaultLedger(dl);
+      }
+    } catch {
+      // Bỏ qua - refreshUser() sẽ tự lấy lại settings/defaultLedger sau đó.
     }
     return user;
   }, []);

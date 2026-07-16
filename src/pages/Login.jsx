@@ -38,8 +38,15 @@ const ERROR_MESSAGES = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginWithEmail, loginWithGoogle, register, verifyOtp, resendOtp } =
-    useAuth();
+  const {
+    currentUser,
+    loading: authLoading,
+    loginWithEmail,
+    loginWithGoogle,
+    register,
+    verifyOtp,
+    resendOtp,
+  } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -114,6 +121,16 @@ const Login = () => {
     };
   }, []);
 
+  // Lưới an toàn: nếu currentUser đã có (đăng nhập thành công ở AuthContext)
+  // nhưng vì lý do gì đó navigate("/") sau khi await login không chạy được
+  // (vd. lệnh gọi /me phụ bị lỗi/timeout ném ra sau khi user đã set), tự động
+  // điều hướng về trang chủ thay vì để người dùng kẹt ở trang đăng nhập.
+  useEffect(() => {
+    if (!authLoading && currentUser) {
+      navigate("/", { replace: true });
+    }
+  }, [authLoading, currentUser, navigate]);
+
   const handleError = useCallback((err) => {
     const message =
       ERROR_MESSAGES[err?.code] ||
@@ -122,18 +139,25 @@ const Login = () => {
     setError(message);
   }, []);
 
-  // Render nút Google GIS
+  // Render nút Google GIS.
+  // Lưu ý: xoá nội dung container trước khi render lại để tránh trường hợp
+  // effect chạy 2 lần liên tiếp (StrictMode ở dev, hoặc đổi authMode qua lại)
+  // để lại 1 iframe nút Google cũ đã "chết" chồng lên nút mới - khi đó lần
+  // bấm đầu tiên rơi vào nút cũ và không có phản hồi gì, phải bấm lần 2 vào
+  // đúng nút mới mới đăng nhập được.
   useEffect(() => {
     if (authMode === "otp" || authMode === "forgot") return;
-    if (!googleBtnRef.current) return;
+    const container = googleBtnRef.current;
+    if (!container) return;
+    container.innerHTML = "";
     renderGoogleButton(
-      googleBtnRef.current,
+      container,
       async (idToken) => {
         try {
           setIsLoading(true);
           setError(null);
           await loginWithGoogle(idToken);
-          navigate("/");
+          navigate("/", { replace: true });
         } catch (err) {
           handleError(err);
         } finally {
@@ -142,6 +166,9 @@ const Login = () => {
       },
       (err) => handleError(err)
     );
+    return () => {
+      container.innerHTML = "";
+    };
   }, [authMode, loginWithGoogle, navigate, handleError]);
 
   const getPasswordStrength = (pwd) => {
