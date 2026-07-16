@@ -180,26 +180,27 @@ const Profile = () => {
       )}
 
       {/* 1. Thông tin cá nhân */}
-      <Card className="border border-divider shadow-none overflow-hidden" radius="lg">
-        {/* Cover Photo */}
-        <div className="h-32 w-full bg-gradient-to-r from-primary-500/80 via-purple-500/80 to-pink-500/80 relative">
-          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
-        </div>
-        <CardBody className="p-6 pt-0 relative">
+      <Card className="border border-white/20 dark:border-white/10 bg-background/60 backdrop-blur-xl shadow-xl overflow-hidden" radius="lg">
+        <CardBody className="p-6 sm:p-8 relative">
           <div className="flex flex-col sm:flex-row gap-6 relative">
-            {/* Avatar Section (Nâng lên trên cover) */}
-            <div className="flex-shrink-0 -mt-12 text-center sm:text-left">
-              <Avatar
-                src={avatarUrl || currentUser?.photoURL}
-                name={displayName}
-                className="w-28 h-28 text-3xl font-bold border-4 border-background shadow-xl"
-                color="primary"
-              />
-              <div className="mt-4 flex gap-2 justify-center sm:justify-start">
-                <div className="flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-1 rounded-md text-xs font-semibold" title="Người dùng Tích cực">
+            {/* Avatar Section */}
+            <div className="flex-shrink-0 text-center sm:text-left">
+              <div className="relative inline-block">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary via-purple-500 to-pink-500 rounded-full blur-md opacity-60 animate-pulse"></div>
+                <div className="p-1 rounded-full bg-gradient-to-tr from-primary via-purple-500 to-pink-500 relative">
+                  <Avatar
+                    src={avatarUrl || currentUser?.photoURL}
+                    name={displayName}
+                    className="w-28 h-28 text-3xl font-bold border-4 border-background"
+                    color="primary"
+                  />
+                </div>
+              </div>
+              <div className="mt-6 flex gap-2 justify-center sm:justify-start">
+                <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/10 to-amber-500/20 text-amber-600 dark:text-amber-400 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-500/20 shadow-sm" title="Người dùng Tích cực">
                   <Star weight="duotone" className="w-4 h-4" /> Bạc
                 </div>
-                <div className="flex items-center gap-1 bg-purple-500/10 text-purple-500 px-2 py-1 rounded-md text-xs font-semibold" title="Tiết kiệm giỏi">
+                <div className="flex items-center gap-1.5 bg-gradient-to-r from-purple-500/10 to-purple-500/20 text-purple-600 dark:text-purple-400 px-3 py-1.5 rounded-full text-xs font-semibold border border-purple-500/20 shadow-sm" title="Tiết kiệm giỏi">
                   <Trophy weight="duotone" className="w-4 h-4" /> 5 Mục tiêu
                 </div>
               </div>
@@ -207,7 +208,7 @@ const Profile = () => {
 
             {/* Edit Info Form */}
             <div className="flex-1 w-full space-y-4 pt-4 sm:pt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-12">
                 <Input
                   label="Tên hiển thị"
                   placeholder="Nhập tên của bạn"
@@ -216,7 +217,7 @@ const Profile = () => {
                     setDisplayName(e.target.value);
                     setIsEditing(true);
                   }}
-                  variant="bordered"
+                  variant="faded"
                   labelPlacement="outside"
                   radius="sm"
                 />
@@ -238,7 +239,7 @@ const Profile = () => {
                     setAvatarUrl(e.target.value);
                     setIsEditing(true);
                   }}
-                  variant="bordered"
+                  variant="faded"
                   labelPlacement="outside"
                   radius="sm"
                   description="Dán link ảnh có sẵn (Google, Imgur...)"
@@ -246,7 +247,7 @@ const Profile = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <Select
                     label="Ngôn ngữ"
-                    variant="bordered"
+                    variant="faded"
                     labelPlacement="outside"
                     radius="sm"
                     selectedKeys={[locale]}
@@ -263,7 +264,7 @@ const Profile = () => {
                   </Select>
                   <Select
                     label="Múi giờ"
-                    variant="bordered"
+                    variant="faded"
                     labelPlacement="outside"
                     radius="sm"
                     selectedKeys={[timezone]}
@@ -285,11 +286,11 @@ const Profile = () => {
                 <div className="flex justify-end pt-2">
                   <Button
                     color="primary"
-                    startContent={<Save size={16} />}
+                    startContent={<Save size={18} />}
                     isLoading={loading}
                     onPress={handleUpdateProfile}
-                    size="sm"
-                    className="font-medium"
+                    size="md"
+                    className="font-medium bg-gradient-to-r from-primary-500 to-purple-500 shadow-lg shadow-primary-500/30 text-white"
                   >
                     Lưu thay đổi
                   </Button>
@@ -298,7 +299,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <Divider />
+          <Divider className="my-8" />
 
           {/* Liên kết tài khoản Google */}
           <div className="flex items-center justify-between gap-4 flex-wrap">
@@ -316,6 +317,7 @@ const Profile = () => {
               <Chip
                 color="success"
                 variant="flat"
+                className="bg-success-50 dark:bg-success-500/20"
                 startContent={<CheckCircle2 className="w-4 h-4" />}
               >
                 Đã liên kết với Google
@@ -332,12 +334,12 @@ const Profile = () => {
       </Card>
 
       {/* 2. Cài đặt Ứng dụng */}
-      <Card className="border border-divider shadow-none" radius="lg">
-        <CardHeader className="bg-content2 px-6 py-4 border-b border-divider">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 flex items-center justify-center">
+      <Card className="border border-white/20 dark:border-white/10 bg-background/60 backdrop-blur-xl shadow-xl" radius="lg">
+        <CardHeader className="bg-content1/50 px-6 py-5 border-b border-divider/50 backdrop-blur-md">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <svg
-                className="w-5 h-5 text-default-600"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -352,13 +354,13 @@ const Profile = () => {
             </h2>
           </div>
         </CardHeader>
-        <CardBody className="p-0">
-          <div className="divide-y divide-divider">
+        <CardBody className="p-3">
+          <div className="flex flex-col gap-1">
             {/* Theme Toggle */}
-            <div className="flex items-center justify-between p-6">
+            <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-default-100 transition-all duration-300 hover:scale-[1.01] hover:shadow-sm cursor-pointer">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-[10px] bg-content2 text-default-600">
-                  {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+                <div className="p-2.5 rounded-[12px] bg-primary/10 text-primary dark:bg-primary/20">
+                  {theme === "dark" ? <Moon weight="duotone" size={22} /> : <Sun weight="duotone" size={22} />}
                 </div>
                 <div>
                   <p className="font-medium text-foreground">
@@ -380,10 +382,10 @@ const Profile = () => {
             </div>
 
             {/* Nhắc nhở hàng ngày */}
-            <div className="flex items-center justify-between p-6">
+            <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-default-100 transition-all duration-300 hover:scale-[1.01] hover:shadow-sm cursor-pointer">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-[10px] bg-content2 text-default-600">
-                  <Bell size={20} />
+                <div className="p-2.5 rounded-[12px] bg-blue-500/10 text-blue-500 dark:bg-blue-500/20">
+                  <Bell weight="duotone" size={22} />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">
@@ -406,10 +408,10 @@ const Profile = () => {
             </div>
 
             {/* Cảnh báo ngân sách */}
-            <div className="flex items-center justify-between p-6">
+            <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-default-100 transition-all duration-300 hover:scale-[1.01] hover:shadow-sm cursor-pointer">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-[10px] bg-content2 text-default-600">
-                  <Wallet size={20} />
+                <div className="p-2.5 rounded-[12px] bg-amber-500/10 text-amber-500 dark:bg-amber-500/20">
+                  <Wallet weight="duotone" size={22} />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">
@@ -432,10 +434,10 @@ const Profile = () => {
             </div>
 
             {/* Nhắc nợ đến hạn */}
-            <div className="flex items-center justify-between p-6">
+            <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-default-100 transition-all duration-300 hover:scale-[1.01] hover:shadow-sm cursor-pointer">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-[10px] bg-content2 text-default-600">
-                  <Landmark size={20} />
+                <div className="p-2.5 rounded-[12px] bg-purple-500/10 text-purple-500 dark:bg-purple-500/20">
+                  <Landmark weight="duotone" size={22} />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">
@@ -458,10 +460,10 @@ const Profile = () => {
             </div>
 
             {/* Data Tools */}
-            <div className="flex items-center justify-between p-6 hover:bg-content2 transition-colors">
+            <div className="flex items-center justify-between p-4 rounded-2xl hover:bg-default-100 transition-all duration-300 hover:scale-[1.01] hover:shadow-sm cursor-pointer group">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-[10px] bg-primary-50 text-primary dark:bg-primary-500/15">
-                  <Database size={20} />
+                <div className="p-2.5 rounded-[12px] bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20">
+                  <Database weight="duotone" size={22} />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">
@@ -475,9 +477,10 @@ const Profile = () => {
               <Button
                 as={Link}
                 to="/data-tools"
-                variant="light"
+                variant="flat"
                 color="primary"
-                endContent={<ChevronRight size={16} />}
+                className="bg-primary-50 dark:bg-primary/20 font-medium group-hover:scale-105 transition-transform"
+                endContent={<ChevronRight size={16} weight="bold" />}
               >
                 Truy cập
               </Button>
@@ -494,9 +497,9 @@ const Profile = () => {
         <Button
           color="danger"
           variant="flat"
-          startContent={<LogOut size={18} />}
+          startContent={<LogOut size={20} weight="duotone" />}
           onPress={logout}
-          className="w-full sm:w-auto min-w-[200px]"
+          className="w-full sm:w-auto min-w-[220px] font-medium bg-danger-50 dark:bg-danger/20 text-danger-600 dark:text-danger-400 hover:scale-105 transition-transform shadow-sm"
         >
           Đăng xuất tài khoản
         </Button>

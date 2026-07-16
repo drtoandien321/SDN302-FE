@@ -14,7 +14,7 @@ import { vi } from "date-fns/locale";
 
 function Dashboard() {
   const {
-    transactions,
+    transactionCount,
     totalIncome,
     totalExpense,
     balance,
@@ -31,7 +31,7 @@ function Dashboard() {
     const hour = new Date().getHours();
     let greeting = "";
     let quote = "";
-    
+
     if (hour >= 5 && hour < 12) {
       greeting = "Chào buổi sáng 🌤️";
       quote = "Khởi đầu ngày mới, đừng quên ghi chép chi tiêu nhé!";
@@ -69,9 +69,8 @@ function Dashboard() {
 
   return (
     <div
-      className={`space-y-5 sm:space-y-6 transition-opacity duration-300 ${
-        isLoading ? "opacity-50 pointer-events-none" : "opacity-100"
-      }`}
+      className={`space-y-5 sm:space-y-6 transition-opacity duration-300 ${isLoading ? "opacity-50 pointer-events-none" : "opacity-100"
+        }`}
     >
       {/* Header */}
       <PageHeader
