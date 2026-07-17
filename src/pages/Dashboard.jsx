@@ -14,7 +14,7 @@ import { vi } from "date-fns/locale";
 
 function Dashboard() {
   const {
-    transactionCount,
+    transactions,
     totalIncome,
     totalExpense,
     balance,
